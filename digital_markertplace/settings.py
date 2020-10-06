@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 
     # own apps
     'books',
+    'shopping_cart',
 ]
 
 
@@ -142,3 +143,8 @@ LOGIN_REDIRECT_URL = '/'
 
 #Django crispy form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+# Stripe settings
+STRIPE_PUBLISH_KEY = 'pk_test_747Miq0i72cqDJ5Vy6cDLj4r00Bd9Hgy59'
+STRIPE_SECRET_KEY = 'sk_test_R60HKqgDpB8A2Tg5wJBvq8iG00Kp2DYMrG'

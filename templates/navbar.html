@@ -1,3 +1,5 @@
+{% load card_template_tags %}
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
 <a class="navbar-brand" href="{% url 'books:book-list' %}">Marketplace</a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,6 +15,14 @@
             <li class="nav-item active">
             <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
             </li>
+
+            {% comment %} display total count of orders in cart {% endcomment %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'cart:order-summary' %}">
+                    {{request.user | cart_item_count }}
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </li> 
          {% else %}
             <li class="nav-item active">
             <a class="nav-link" href="{% url 'account_login' %}">Login</a>

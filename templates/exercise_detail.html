@@ -22,20 +22,14 @@
 {% block content %}
     <div class="row">
         <main class="col-md-4">
-            <div class="card" style="width: 18rem;">
-                <div class="card-header"> {{ exercise.chapter.book.title }}</div>
-                <img src="{{ exercise.chapter.book.cover.url }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <p class="card-text">Published on {{ exercise.chapter.book.publication_date }}</p>
-                </div>
-              </div>
+            {% include "book_snippet.html" with book=exercise.chapter.book %}
         </main>
         <aside class="col-md-8">
             <div class="card">
                 <div class="card-header">
                     Solutions
                 </div>
-                {% if exercise.chapter.book in request.user.userlibrary.book_list %}
+                {% if book_status == 'owned' %}
  
                     {% for solution in exercise.solution_set.all %}
                         <div class="accordion" id="toggle-{{ solution.solution_number }}">

@@ -6,14 +6,14 @@ from django.shortcuts import redirect, reverse
 
 # Class that contains all books a user owns
 class UserLibrary(models.Model):
-    books = models.ManyToManyField('Book') #Book is in quote because the Book class is below this model
+    books = models.ManyToManyField('Book', blank=True) #Book is in quote because the Book class is below this model
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
     
     #method that shows books the user has purchase
-    def book_lost(self):
+    def book_list(self):
         return self.books.all()
 
     class Meta:

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 
@@ -11,7 +12,7 @@ NOT_IN_CART = 'not_in_cart'
 def check_book_relationship(request, book):
     if book in request.user.userlibrary.books.all():
         return OWNED
-    order_qs = Order.objects.filter(user=request.user)
+    order_qs = Order.objects.filter(user=request.user, is_ordered=False)
     if order_qs.exists():
         order = order_qs[0]
         order_item_qs = OrderItem.objects.filter(book=book)
@@ -31,6 +32,7 @@ def book_list(request):
     return render(request, "book_list.html", context)
 
 
+@login_required
 def book_detail(request, slug):
     # display a list of the chapters in this book as well as other details
     book = get_object_or_404(Book, slug=slug)
@@ -44,6 +46,7 @@ def book_detail(request, slug):
     return render(request, "book_detail.html", context)
 
 
+@login_required
 def chapter_detail(request, book_slug, chapter_number):
     # display a list of the chapters in this book as well as other details
     chapter_qs = Chapter.objects \
@@ -61,6 +64,7 @@ def chapter_detail(request, book_slug, chapter_number):
     return Http404 
 
 
+@login_required
 def exercise_detail(request, book_slug, chapter_number, exercise_number):
     exercise_qs = Exercise.objects \
         .filter(chapter__book__slug=book_slug) \

@@ -9,15 +9,17 @@
 </head>
 <body>
     <div class="container">
-        {% include "navbar.html" %}
-        {% comment %} Breadcrums {% endcomment %}
+        {% comment %} Navigation bar {% endcomment %}
+        {% include "navbar.html" %} 
 
-        <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            {% block breadcrumb %}
-            {% endblock breadcrumb %}
-        </ol>
-        </nav>
+        {% comment %} Messages {% endcomment %}
+        {% include "messages.html" %}
+
+        {% comment %} Breadcrums {% endcomment %}
+       
+        {% block breadcrumb %}
+        {% endblock breadcrumb %}
+ 
         {% comment %} Breadcrums ends here {% endcomment %}
    
         {% block content %}

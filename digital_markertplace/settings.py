@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # own apps
     'books',
     'shopping_cart',
+    'core',
 ]
 
 
